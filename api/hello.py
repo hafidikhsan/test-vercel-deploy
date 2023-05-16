@@ -13,6 +13,7 @@ from cloudinary.utils import cloudinary_url
 # Library Fluency
 import numpy as np
 import tensorflow as tf
+import keras
 import librosa
 
 # Cloudinary API
@@ -38,7 +39,7 @@ cloudinary.config(
 app.logger.info('%s', 'dntqqcuci')
 
 #Fluency - Model path
-fluency_model_dir = '..\assets\model\fluency_model_real_data'
+fluency_model_dir = '..\fluency_model_real_data.h5'
 
 # Fluency - Fungsi ekstraksi ciri
 def feature_extraction(file_name):
@@ -56,7 +57,8 @@ def feature_extraction(file_name):
     return mfccs, rmse, spectral_flux, zcr
 
 #Fluency - Load Model
-fluency_modelss = tf.keras.models.load_model(fluency_model_dir)
+fluency_modelss = keras.models.load_model(fluency_model_dir)
+# fluency_modelss = tf.keras.models.load_model(fluency_model_dir)
 
 # Upload File Fluency
 @app.route("/fluency", methods=['POST'])
